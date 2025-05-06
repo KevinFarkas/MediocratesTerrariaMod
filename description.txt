@@ -1,1 +1,1 @@
-Modify this file with a description of your mod.
+Randomizes chest loot upon world creation. Be aware that if you run another mod that adds loot to chests, this may overwrite that loot when it randomizes it.

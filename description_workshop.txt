@@ -1,1 +1,1 @@
-This description will show up on the steam page, check out https://steamcommunity.com/comment/Guide/formattinghelp.
+Randomizes chest loot upon world creation. Be aware that if you run another mod that adds loot to chests, this may overwrite that loot when it randomizes it.
