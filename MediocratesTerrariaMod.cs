@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Terraria.GameContent.Generation;
 using Terraria.WorldBuilding;
 using Terraria.IO;
+using System;
 
 namespace MediocratesTerrariaMod
 {
@@ -25,7 +26,7 @@ namespace MediocratesTerrariaMod
         private void ModifyChests(GenerationProgress progress, GameConfiguration configuration)
         {
 
-            #region Randomize chests items using only pre-hardmode items but overwrites mod items.  needs to only do wood chests to avoid overwritting better chests later.
+            #region Randomize chests items
 
             for (int chestIndex = 0; chestIndex < Main.maxChests; chestIndex++)
             {
@@ -33,29 +34,36 @@ namespace MediocratesTerrariaMod
                 if (chest == null)
                     continue;
 
-
+                //TODO:fix these checks.
                 // if this isn't a gold chest or a wood chest, or is a locked gold chest then stop
-                if (!IsValidChest(chest))
-                    return;
+                //  if (!IsVal idChest(chest))
+                //     return;
 
                 for (int i = 0; i < Chest.maxItems; i++)
                 {
                     if (chest.item[i]?.type > ItemID.None)
                     {
+
+                        //TODO:fix these checks.
                         //if it's not a modded item.
-                        if (!IsModdedItem(chest.item[i]))
-                        {
-                            //remove whitelisted items
-                            var nonWhitelistedItems = GetNonWhitelistedItems(PreHardmodeItems, WhiteListedItems);
+                        // if (!IsModdedItem(chest.item[i]))
+                        //{
+                        //remove whitelisted items
+                        // var nonWhitelistedItems = GetNonWhitelistedItems(PreHardmodeItems, WhiteListedItems);
+                        var nonWhitelistedItems = PreHardmodeItems;
+                        //pull a random item id from the filtered list.
+                        int randomItemType = nonWhitelistedItems[Main.rand.Next(nonWhitelistedItems.Length)];
+                        chest.item[i].SetDefaults(randomItemType);
 
-                            //pull a random item id from the filtered list.
-                            int randomItemType = nonWhitelistedItems[Main.rand.Next(nonWhitelistedItems.Length)];
-                            chest.item[i].SetDefaults(randomItemType);
+                        //makes large stacks happen a lot.
+                        //chest.item[i].stack = (chest.item[i].maxStack > 1)
+                        //    ? Main.rand.Next(1, chest.item[i].maxStack + 1)
+                        //    : 1;
 
-                            chest.item[i].stack = (chest.item[i].maxStack > 1)
-                                ? Main.rand.Next(1, chest.item[i].maxStack + 1)
-                                : 1;
-                        }
+                        chest.item[i].stack = (chest.item[i].maxStack > 1)
+                        ? Math.Min(chest.item[i].maxStack, (int)(Math.Pow(Main.rand.NextDouble(), 2) * chest.item[i].maxStack) + 1) : 1;
+
+                        // }
 
                     }
                 }
@@ -85,7 +93,7 @@ namespace MediocratesTerrariaMod
             }
 
             return filtered.ToArray();
-        } 
+        }
 
         /// <summary>
         /// Returns true if this chest is one that we allow to be modified.  
