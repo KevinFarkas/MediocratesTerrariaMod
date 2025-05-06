@@ -1,0 +1,3 @@
+displayName = Mediocrates Terraria Mod
+author = Mediocrates
+version = 0.1
