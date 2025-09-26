@@ -1,1 +1,1 @@
-Randomizes chest loot upon world creation. Be aware that if you run another mod that adds loot to chests, this may overwrite that loot when it randomizes it.  Source code: https://github.com/KevinFarkas/MediocratesTerrariaMod
+Adds 2-8 random items to chests upon world creation.  Items selected from a list of mostly pre-hardmode items.  Source code: https://github.com/KevinFarkas/MediocratesTerrariaMod

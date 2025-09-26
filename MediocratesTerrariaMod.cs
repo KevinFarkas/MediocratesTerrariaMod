@@ -6,8 +6,6 @@ using Terraria.GameContent.Generation;
 using Terraria.WorldBuilding;
 using Terraria.IO;
 using System;
-using System.Collections;
-using Terraria.ModLoader.IO;
 
 namespace MediocratesTerrariaMod
 {
@@ -20,8 +18,6 @@ namespace MediocratesTerrariaMod
 
             int index = tasks.FindIndex(genpass => genpass.Name.Equals("Micro Biomes"));
             if (index != -1)
-            //int postInitializationIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Post Initialization"));
-            //if (postInitializationIndex != -1)
             {
                 tasks.Insert(index + 1, new PassLegacy("MyChestMod", ModifyChests));
             }
@@ -36,19 +32,33 @@ namespace MediocratesTerrariaMod
                 if (chest == null)
                     continue;
 
-                // add item to chest.
-                // Find first empty slot
-                for (int i = 0; i < chest.item.Length; i++)
+                Random rand = new Random(Main.worldID);
+                int amountOfItemsToAdd = rand.Next(2, 9);
+
+                // add items to chest.
+                for (int a = 0; a < amountOfItemsToAdd; a++)
                 {
-                    if (chest.item[i] == null || chest.item[i].type == ItemID.None)
+                    // Find first empty slot
+                    for (int i = 0; i < chest.item.Length; i++)
                     {
-                        int randomItemId = PreHardmodeItems[Main.rand.Next(PreHardmodeItems.Length)];
-                        chest.item[i].SetDefaults(randomItemId);
-                        chest.item[i].stack = 1; // set amount if stackable
-                        break; // only add one item
+                        if (chest.item[i] == null || chest.item[i].type == ItemID.None)
+                        {
+                            int randomItemId = PreHardmodeItems[Main.rand.Next(PreHardmodeItems.Length)];
+                            chest.item[i].SetDefaults(randomItemId);
+
+                            if(chest.item[i].maxStack > 1)
+                            {
+                                chest.item[i].stack = rand.Next(2, 69); // set amount if stackable
+                                break; // only add one item
+                            }
+                            else
+                            {
+                                chest.item[i].stack = 1; // set amount if stackable
+                                break; // only add one item
+                            }    
+                        }
                     }
                 }
-
             }
         }
 
