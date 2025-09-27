@@ -6,6 +6,7 @@ using Terraria.GameContent.Generation;
 using Terraria.WorldBuilding;
 using Terraria.IO;
 using System;
+using System.Security.Permissions;
 using Steamworks;
 
 namespace MediocratesTerrariaMod
@@ -13,6 +14,10 @@ namespace MediocratesTerrariaMod
     // Please read https://github.com/tModLoader/tModLoader/wiki/Basic-tModLoader-Modding-Guide#mod-skeleton-contents for more information about the various files in a mod.
     public class MediocratesTerrariaMod : ModSystem
     {
+
+        private static Mod calamityMod;
+        public static bool IsCalamityLoaded => ModLoader.TryGetMod("CalamityMod", out calamityMod);
+
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
 
@@ -25,6 +30,8 @@ namespace MediocratesTerrariaMod
 
         private void ModifyChests(GenerationProgress progress, GameConfiguration configuration)
         {
+            bool lastItemWasVanilla = true;
+
             //for each chest
             for (int chestIndex = 0; chestIndex < Main.maxChests; chestIndex++)
             {
@@ -43,24 +50,103 @@ namespace MediocratesTerrariaMod
                     {
                         if (chest.item[i] == null || chest.item[i].type == ItemID.None)
                         {
-                            int randomItemId = PreHardmodeItems[Main.rand.Next(PreHardmodeItems.Length)];
-                            chest.item[i].SetDefaults(randomItemId);
-
-                            if(chest.item[i].maxStack > 1)
+                            if (IsCalamityLoaded)
                             {
-                                chest.item[i].stack = rand.Next(2, 11); // set amount if stackable
-                                break; // only add one item
+                                if (calamityMod != null) 
+                                {
+
+                                    if (lastItemWasVanilla)
+                                    {
+                                        string randomCalamityItemName = CalamityItemNames[Main.rand.Next(CalamityItemNames.Length)];
+
+                                        if (calamityMod.TryFind<ModItem>(randomCalamityItemName, out ModItem exampleItem))
+                                        {
+                                            // Get the item ID
+                                            int exampleItemId = exampleItem.Type;
+
+                                            lastItemWasVanilla = false;
+
+                                            chest.item[i].SetDefaults(exampleItemId);
+                                            if (chest.item[i].maxStack > 1)
+                                            {
+                                                chest.item[i].stack = rand.Next(2, 11); // set amount if stackable
+                                                break; // only add one item
+                                            }
+                                            else
+                                            {
+                                                chest.item[i].stack = 1; // set amount if stackable
+                                                break; // only add one item
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        int randomItemId = PreHardmodeItems[Main.rand.Next(PreHardmodeItems.Length)];
+
+                                        lastItemWasVanilla = true;
+
+                                        chest.item[i].SetDefaults(randomItemId);
+
+                                        if (chest.item[i].maxStack > 1)
+                                        {
+                                            chest.item[i].stack = rand.Next(2, 11); // set amount if stackable
+                                            break; // only add one item
+                                        }
+                                        else
+                                        {
+                                            chest.item[i].stack = 1; // set amount if stackable
+                                            break; // only add one item
+                                        }
+                                    }
+
+                                }
                             }
                             else
                             {
-                                chest.item[i].stack = 1; // set amount if stackable
-                                break; // only add one item
-                            }    
+                                int randomItemId = PreHardmodeItems[Main.rand.Next(PreHardmodeItems.Length)];
+                                chest.item[i].SetDefaults(randomItemId);
+
+                                if (chest.item[i].maxStack > 1)
+                                {
+                                    chest.item[i].stack = rand.Next(2, 11); // set amount if stackable
+                                    break; // only add one item
+                                }
+                                else
+                                {
+                                    chest.item[i].stack = 1; // set amount if stackable
+                                    break; // only add one item
+                                }
+                            }
+
                         }
                     }
                 }
             }
         }
+
+        public static string[] CalamityItemNames =
+        {
+            "GeliticBlade",
+            "Aestheticus",
+            "StressPills",
+            "Goobow",
+            "FlurrystormCannon",
+            "InfernoPotion",
+            "TeslaPotion",
+            "BlackAnurian",
+            "RadiantOoze",
+            "RustyBeaconPrototype",
+            "DankStaff",
+            "HerringStaff",
+            "SlimePuppetStaff",
+            "StatigelArmor",
+            "StatigelGreaves",
+            "StatigelHelm",
+            "StatigelHeadgear",
+            "StatigelCap",
+            "StatigelHood",
+            "StatigelMask",
+        };
 
         public static int[] PreHardmodeItems =
        {
@@ -78,6 +164,8 @@ namespace MediocratesTerrariaMod
             ItemID.QueenSlimeMountSaddle,
             ItemID.WolfMountItem,
             ItemID.DarkMageBookMountItem,
+            ItemID.PirateShipMountItem,
+            ItemID.CosmicCarKey,
             ItemID.LightningBoots,
             ItemID.WormScarf,
             ItemID.BerserkerGlove,
