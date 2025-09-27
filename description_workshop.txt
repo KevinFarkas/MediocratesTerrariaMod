@@ -1,1 +1,1 @@
-Adds 1-3 random good items to chests upon world creation.  Items selected from a list of mostly pre-hardmode items.  Source code: https://github.com/KevinFarkas/MediocratesTerrariaMod
+Adds 1-3 random good items to chests upon world creation.  Now supports Calamity.  Items selected from a list of mostly pre-hardmode items.  Source code: https://github.com/KevinFarkas/MediocratesTerrariaMod

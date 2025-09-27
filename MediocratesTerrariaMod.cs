@@ -43,6 +43,9 @@ namespace MediocratesTerrariaMod
                 int amountOfItemsToAdd = rand.Next(1, 4);
 
                 // add items to chest.
+
+                #region works with random Calamity and Vanilla items
+
                 for (int a = 0; a < amountOfItemsToAdd; a++)
                 {
                     // Find first empty slot
@@ -52,9 +55,8 @@ namespace MediocratesTerrariaMod
                         {
                             if (IsCalamityLoaded)
                             {
-                                if (calamityMod != null) 
+                                if (calamityMod != null)
                                 {
-
                                     if (lastItemWasVanilla)
                                     {
                                         string randomCalamityItemName = CalamityItemNames[Main.rand.Next(CalamityItemNames.Length)];
@@ -121,6 +123,9 @@ namespace MediocratesTerrariaMod
                         }
                     }
                 }
+
+                #endregion
+
             }
         }
 
@@ -130,8 +135,6 @@ namespace MediocratesTerrariaMod
             "Aestheticus",
             "StressPills",
             "Goobow",
-            "FlurrystormCannon",
-            "InfernoPotion",
             "TeslaPotion",
             "BlackAnurian",
             "RadiantOoze",
@@ -144,8 +147,9 @@ namespace MediocratesTerrariaMod
             "StatigelHelm",
             "StatigelHeadgear",
             "StatigelCap",
-            "StatigelHood",
+            "StatigelHood", 
             "StatigelMask",
+            "BloodyWormTooth",
         };
 
         public static int[] PreHardmodeItems =
@@ -206,6 +210,7 @@ namespace MediocratesTerrariaMod
             ItemID.FlaskofFire,
             ItemID.FlaskofPoison,
             ItemID.ArcheryPotion,
+            ItemID.InfernoPotion,
 
             //Armor
             ItemID.WizardHat,
