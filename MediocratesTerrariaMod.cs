@@ -41,6 +41,11 @@ namespace MediocratesTerrariaMod
 
                 Random rand = new Random(Main.worldID);
                 int amountOfItemsToAdd = rand.Next(1, 4);
+                //if amountOfItemsToAdd is 1, use a rare loot table.
+                //if amountOfItemsToAdd is 2, use a somewhat-rare loot table.
+                //if amountOfItemsToAdd is 3, use a decent loot table.
+                //if amountOfItemsToAdd is 4, use a not good loot table.
+                //if amountOfItemsToAdd is 5, use a worst loot table.
 
                 // add items to chest.
 
@@ -136,6 +141,7 @@ namespace MediocratesTerrariaMod
             "StressPills",
             "Goobow",
             "TeslaPotion",
+            "Zerg Potion",
             "BlackAnurian",
             "RadiantOoze",
             "RustyBeaconPrototype",
@@ -150,7 +156,29 @@ namespace MediocratesTerrariaMod
             "StatigelHood", 
             "StatigelMask",
             "BloodyWormTooth",
+            "OldDie",
+            "TheFirstShadowflame",
+            "JellyChargedBattery",
+            "SandSharkToothNecklace",
+            "BloodyWormScarf",
+            "Grand Gelatin",
+            "AmalgamatedBrain",
+            "TheCommunity",
+            "AngelTreads",
+            "LivingDew",
+            "ReaverHeadgear",
+            "GazeofCrysthamyr",
+            "TheCartofGods",
+            "SuspiciousLookingJellyBean",
+            "MarniteArchitectarmor",
+            "Cosmolight",
+            "Terminus",
+            "AncientFossil",
+            "ArchaicPowder",
+            "OceanCrest",
+            "SpelunkersAmulet",
         };
+
 
         public static int[] PreHardmodeItems =
        {
@@ -165,11 +193,7 @@ namespace MediocratesTerrariaMod
             ItemID.FinWings,
             ItemID.FrozenWings,
             ItemID.HarpyWings,
-            ItemID.QueenSlimeMountSaddle,
-            ItemID.WolfMountItem,
-            ItemID.DarkMageBookMountItem,
             ItemID.PirateShipMountItem,
-            ItemID.CosmicCarKey,
             ItemID.LightningBoots,
             ItemID.WormScarf,
             ItemID.BerserkerGlove,
@@ -179,6 +203,25 @@ namespace MediocratesTerrariaMod
             ItemID.Emerald,
             ItemID.Sapphire,
             ItemID.Amethyst,
+            ItemID.TerrasparkBoots,
+            ItemID.SummonerEmblem,
+            ItemID.RangerEmblem,
+            ItemID.SorcererEmblem,
+            ItemID.WarriorEmblem,
+            ItemID.SpookyWoodMountItem,
+            ItemID.TeleportationPylonHallow,
+            ItemID.AntiGravityHook,
+            ItemID.CelestialStone,
+            ItemID.CelestialShell,
+            ItemID.EmeraldHook,
+            ItemID.AmethystHook,
+            ItemID.SapphireHook,
+            ItemID.WebSlinger,
+            ItemID.LightningCarrot,
+            ItemID.BallOfFuseWire,
+            ItemID.WispinaBottle,
+            ItemID.SuspiciousLookingTentacle,
+            ItemID.FairyBell,
 
             //Weapons
             ItemID.HiveFive,
@@ -195,6 +238,13 @@ namespace MediocratesTerrariaMod
             //Tools
             ItemID.DeathbringerPickaxe,
             ItemID.NightmarePickaxe,
+            ItemID.AncientChisel,
+            ItemID.CnadyCanePickaxe,
+            ItemID.FossilPickaxe,
+            ItemID.BonePickaxe,
+            ItemID.PlatinumPickaxe,
+            ItemID.ReaverShark,
+            ItemID.DirtiestBlock,
 
             //Potions
             ItemID.IronskinPotion,
@@ -211,6 +261,7 @@ namespace MediocratesTerrariaMod
             ItemID.FlaskofPoison,
             ItemID.ArcheryPotion,
             ItemID.InfernoPotion,
+            ItemID.MiningPotion,
 
             //Armor
             ItemID.WizardHat,
@@ -225,6 +276,10 @@ namespace MediocratesTerrariaMod
             ItemID.ObsidianPants,
             ItemID.ObsidianHelm,
             ItemID.ObsidianShirt,
+            ItemID.HallowedHood,
+            ItemID.HallowedHeadgear,
+            ItemID.HallowedHelmet,
+            ItemID.HallowedMask,
         };
     }
 }

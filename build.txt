@@ -1,3 +1,3 @@
 displayName = Mediocrates Chest Loot Randomizer
 author = Mediocrates
-version = 1.3
+version = 1.4
